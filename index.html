@@ -1,0 +1,651 @@
+<title>Tra cứu pháp luật đất đai</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Bố cục: hàng câu hỏi trên cùng; dưới là hai cột, trái = hệ thống văn bản, phải = xem văn bản hoặc kết quả tư vấn, thanh xuất file ở cuối ô phải */
+:root{--bg:#f3f6f7;--surface:#ffffff;--ink:#13222c;--muted:#5a6b76;--line:#d5dee3;--accent:#0b5a6b;--accent-ink:#ffffff;--ok:#1d6b3a;--warn:#9a5b00;--bad:#a8281f;
+--sans:"Be Vietnam Pro",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a20;--surface:#17252d;--ink:#e6eef1;--muted:#93a6b0;--line:#2a3c46;--accent:#5fc1d4;--accent-ink:#0a1a20;--ok:#6fd08f;--warn:#f0b35a;--bad:#ff8d82;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1a20;--surface:#17252d;--ink:#e6eef1;--muted:#93a6b0;--line:#2a3c46;--accent:#5fc1d4;--accent-ink:#0a1a20;--ok:#6fd08f;--warn:#f0b35a;--bad:#ff8d82;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;padding-inline:16px;padding-block:16px 32px}
+.wrap{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1{font-size:1.3rem;margin:0;text-wrap:balance}
+h2{font-size:1.05rem;margin:0;text-wrap:balance}
+h3{font-size:.95rem;margin:0}
+.sub{color:var(--muted);margin:2px 0 0;font-size:.88rem}
+textarea,input[type=search],input[type=text],select{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px;width:100%;min-width:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ask{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{font:inherit;font-weight:600;display:inline-block;text-decoration:none;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);border-radius:6px;padding:9px 14px;cursor:pointer}
+.btn.alt{background:none;color:var(--accent)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.chip{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.files{display:flex;gap:6px;flex-wrap:wrap}
+.files .chip{font-size:.8rem}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:14px;align-items:start}
+@media (max-width:820px){.grid{grid-template-columns:minmax(0,1fr)}}
+.left{display:flex;flex-direction:column;gap:8px;min-width:0}
+.list{background:var(--surface);border:1px solid var(--line);border-radius:8px;max-height:68vh;overflow:auto}
+.row{display:block;width:100%;text-align:left;font:inherit;color:inherit;background:none;border:0;border-bottom:1px solid var(--line);padding:10px 12px;cursor:pointer}
+.row:last-child{border-bottom:0}
+.row:hover{background:var(--bg)}
+.row[aria-current=true]{background:var(--bg);box-shadow:inset 3px 0 0 var(--accent)}
+.so{font-family:var(--mono);font-size:.85rem;font-weight:500}
+.ten{display:block;font-size:.88rem;color:var(--muted)}
+.tag{font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.right{background:var(--surface);border:1px solid var(--line);border-radius:8px;display:flex;flex-direction:column;min-width:0;min-height:60vh}
+.tabs{display:flex;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.body{padding:14px 16px;display:flex;flex-direction:column;gap:12px;flex:1;min-width:0;overflow:auto;max-height:68vh}
+.foot{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid var(--line)}
+dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:6px 14px;margin:0;font-size:.9rem}
+dt{color:var(--muted)}dd{margin:0}
+.st-ok{color:var(--ok)}.st-warn{color:var(--warn)}.st-bad{color:var(--bad)}
+.note{font-size:.85rem;color:var(--muted);margin:0}
+.nd{white-space:pre-wrap;max-height:260px;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px;font-size:.85rem}
+.step{border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.step b{font-weight:600}
+.step .k{color:var(--muted);font-size:.82rem}
+label{font-weight:600;font-size:.9rem;display:block}
+.f2{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.addp{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.mono{font-family:var(--mono)}
+</style>
+<div class="wrap">
+<header><h1>Tra cứu pháp luật đất đai</h1>
+<p class="sub">Văn bản Trung ương, tỉnh Phú Thọ (mới) và Vĩnh Phúc (cũ). Danh mục đối chiếu ngày 11/10/2026.</p></header>
+
+<section class="ask" id="askbox" hidden>
+<label for="sit">Câu hỏi cần tư vấn</label>
+<textarea id="sit" rows="3" placeholder="Ví dụ: Hộ ông A xin tách thửa đất ở thành 2 thửa tại xã Tam Dương, thửa có GCN cấp năm 2015. Cần trình tự và căn cứ pháp lý."></textarea>
+<div class="btns"><button class="btn alt" id="upbtn" type="button">Tải tài liệu lên</button><input type="file" id="up" multiple hidden>
+<button class="btn" id="go" type="button">Tư vấn</button><span class="note" id="upnote"></span></div>
+<div class="files" id="files"></div>
+</section>
+
+<section class="addp" id="addp" hidden><h2>Bổ sung văn bản pháp luật</h2>
+<div class="f2"><div><label for="f_cap">Cấp</label><select id="f_cap"><option>Trung ương</option><option>Phú Thọ (mới)</option><option>Vĩnh Phúc (cũ)</option><option>Khác</option></select></div>
+<div><label for="f_so">Số hiệu *</label><input id="f_so" type="text" placeholder="VD: 50/2026/NĐ-CP"></div>
+<div><label for="f_ban">Ngày ban hành</label><input id="f_ban" type="text" placeholder="dd/mm/yyyy"></div>
+<div><label for="f_hl">Hiệu lực từ</label><input id="f_hl" type="text" placeholder="dd/mm/yyyy"></div></div>
+<label for="f_ten">Trích yếu *</label><input id="f_ten" type="text">
+<label for="f_tt">Tình trạng hiệu lực</label><input id="f_tt" type="text" value="Còn hiệu lực">
+<label for="f_pdf">Đường dẫn PDF hoặc trang văn bản (nếu có)</label><input id="f_pdf" type="text" placeholder="https://...">
+<label for="f_nd">Toàn văn hoặc các điều cần dùng (dùng khi tư vấn)</label><textarea id="f_nd" rows="7"></textarea>
+<div class="btns"><button class="btn" id="f_save" type="button">Lưu văn bản</button><button class="btn alt" id="f_cancel" type="button">Đóng</button></div><p class="note" id="f_msg"></p></section>
+
+<div class="grid">
+<div class="left">
+<input type="search" id="q" placeholder="Tìm theo số hiệu hoặc nội dung" aria-label="Tìm văn bản">
+<div class="btns"><span id="chips" class="btns"></span><button class="chip" id="addbtn" type="button" hidden>+ Bổ sung văn bản</button></div>
+<div class="list" id="list" role="list"></div></div>
+<section class="right">
+<div class="tabs"><button class="chip" id="tabdoc" type="button" aria-pressed="true">Văn bản</button><button class="chip" id="tabadv" type="button" aria-pressed="false">Kết quả tư vấn</button></div>
+<div class="body" id="body"></div>
+<div class="foot"><button class="btn alt" id="xw" type="button" disabled>Xuất Word</button><button class="btn" id="xx" type="button" disabled>Xuất Excel</button></div>
+</section></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+<script>
+const BASE=[
+ {
+  "cap": "Trung ương",
+  "so": "31/2024/QH15",
+  "ten": "Luật Đất đai 2024",
+  "ban": "18/01/2024",
+  "hl": "01/08/2024",
+  "tt": "Còn hiệu lực (đã được sửa đổi bởi nhiều luật khác 2024-2025)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=31/2024/QH15",
+  "gc": "Dự án Luật Đất đai (sửa đổi) dự kiến trình Quốc hội kỳ họp tháng 10/2026, chưa phải luật có hiệu lực"
+ },
+ {
+  "cap": "Trung ương",
+  "so": "254/2025/QH15",
+  "ten": "Nghị quyết tháo gỡ khó khăn, vướng mắc trong tổ chức thi hành Luật Đất đai",
+  "ban": "11/12/2025",
+  "hl": "01/01/2026",
+  "tt": "Còn hiệu lực",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=254/2025/QH15",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "71/2024/NĐ-CP",
+  "ten": "Quy định về giá đất",
+  "ban": "27/06/2024",
+  "hl": "01/08/2024",
+  "tt": "Còn hiệu lực (sửa đổi bởi NĐ 151/2025, 226/2025)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=71/2024/N%C4%90-CP",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "88/2024/NĐ-CP",
+  "ten": "Bồi thường, hỗ trợ, tái định cư khi Nhà nước thu hồi đất",
+  "ban": "",
+  "hl": "01/08/2024",
+  "tt": "Còn hiệu lực (kiểm tra sửa đổi bởi NĐ 151/2025, 226/2025)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=88/2024/N%C4%90-CP",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "101/2024/NĐ-CP",
+  "ten": "Điều tra cơ bản đất đai; đăng ký, cấp GCN; Hệ thống thông tin đất đai",
+  "ban": "29/07/2024",
+  "hl": "01/08/2024",
+  "tt": "Còn hiệu lực (sửa đổi bởi NĐ 151/2025, 226/2025)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=101/2024/N%C4%90-CP",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "102/2024/NĐ-CP",
+  "ten": "Quy định chi tiết thi hành một số điều của Luật Đất đai",
+  "ban": "30/07/2024",
+  "hl": "01/08/2024",
+  "tt": "Còn hiệu lực (sửa đổi bởi NĐ 151/2025, 226/2025)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=102/2024/N%C4%90-CP",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "103/2024/NĐ-CP",
+  "ten": "Tiền sử dụng đất, tiền thuê đất",
+  "ban": "30/07/2024",
+  "hl": "01/08/2024",
+  "tt": "Còn hiệu lực (sửa đổi bởi NĐ 291/2025, 50/2026)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=103/2024/N%C4%90-CP",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "104/2024/NĐ-CP",
+  "ten": "Quỹ phát triển đất",
+  "ban": "31/07/2024",
+  "hl": "01/08/2024",
+  "tt": "Còn hiệu lực",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=104/2024/N%C4%90-CP",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "112/2024/NĐ-CP",
+  "ten": "Hướng dẫn về đất trồng lúa",
+  "ban": "",
+  "hl": "",
+  "tt": "Còn hiệu lực (cần kiểm tra)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=112/2024/N%C4%90-CP",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "115/2024/NĐ-CP",
+  "ten": "Chi tiết Luật Đấu thầu về lựa chọn nhà đầu tư dự án có sử dụng đất",
+  "ban": "16/09/2024",
+  "hl": "16/09/2024",
+  "tt": "Còn hiệu lực (cần kiểm tra)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=115/2024/N%C4%90-CP",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "123/2024/NĐ-CP",
+  "ten": "Xử phạt vi phạm hành chính trong lĩnh vực đất đai",
+  "ban": "04/10/2024",
+  "hl": "04/10/2024",
+  "tt": "Còn hiệu lực, đã sửa đổi bởi NĐ 281/2026/NĐ-CP",
+  "pdf": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2026/7/73-vbhn-bnnmt.signed.pdf",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=123/2024/N%C4%90-CP",
+  "gc": "Bản PDF là Văn bản hợp nhất 73/2026/VBHN-BNNMT"
+ },
+ {
+  "cap": "Trung ương",
+  "so": "151/2025/NĐ-CP",
+  "ten": "Phân định thẩm quyền chính quyền địa phương 2 cấp, phân quyền, phân cấp trong lĩnh vực đất đai",
+  "ban": "12/06/2025",
+  "hl": "01/07/2025",
+  "tt": "Còn hiệu lực (sửa đổi bởi NĐ 226/2025)",
+  "pdf": "https://www.mae.gov.vn/noidung/Lists/VBQPPL/Attachments/632/50-VBHN-BNNMT.pdf",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=151/2025/N%C4%90-CP",
+  "gc": "Bản PDF là Văn bản hợp nhất 50/VBHN-BNNMT"
+ },
+ {
+  "cap": "Trung ương",
+  "so": "226/2025/NĐ-CP",
+  "ten": "Sửa đổi, bổ sung các nghị định quy định chi tiết thi hành Luật Đất đai",
+  "ban": "15/08/2025",
+  "hl": "15/08/2025",
+  "tt": "Còn hiệu lực",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=226/2025/N%C4%90-CP",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "291/2025/NĐ-CP",
+  "ten": "Sửa đổi cách tính, miễn giảm, thu tiền sử dụng đất khi cấp Giấy chứng nhận",
+  "ban": "",
+  "hl": "06/11/2025",
+  "tt": "Còn hiệu lực",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=291/2025/N%C4%90-CP",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "87/2025/NĐ-CP",
+  "ten": "Giảm tiền thuê đất năm 2024",
+  "ban": "",
+  "hl": "",
+  "tt": "Cần kiểm tra hiệu lực (văn bản có thời hạn áp dụng)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=87/2025/N%C4%90-CP",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "49/2026/NĐ-CP",
+  "ten": "Chi tiết, hướng dẫn một số điều của Nghị quyết 254/2025/QH15",
+  "ban": "31/01/2026",
+  "hl": "31/01/2026",
+  "tt": "Còn hiệu lực",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=49/2026/N%C4%90-CP",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "50/2026/NĐ-CP",
+  "ten": "Chi tiết Nghị quyết 254/2025/QH15 về tiền sử dụng đất, tiền thuê đất",
+  "ban": "31/01/2026",
+  "hl": "",
+  "tt": "Còn hiệu lực",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=50/2026/N%C4%90-CP",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "281/2026/NĐ-CP",
+  "ten": "Sửa đổi, bổ sung Nghị định 123/2024/NĐ-CP về xử phạt vi phạm hành chính đất đai",
+  "ban": "13/07/2026",
+  "hl": "31/08/2026",
+  "tt": "Còn hiệu lực",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=281/2026/N%C4%90-CP",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "08/2024/TT-BTNMT",
+  "ten": "Thống kê, kiểm kê đất đai và lập bản đồ hiện trạng sử dụng đất",
+  "ban": "31/07/2024",
+  "hl": "01/08/2024",
+  "tt": "Còn hiệu lực (sửa đổi bởi TT 23/2025/TT-BNNMT)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=08/2024/TT-BTNMT",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "09/2024/TT-BTNMT",
+  "ten": "CSDL quốc gia về đất đai và yêu cầu kỹ thuật phần mềm",
+  "ban": "31/07/2024",
+  "hl": "01/08/2024",
+  "tt": "Còn hiệu lực (sửa đổi 2025)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=09/2024/TT-BTNMT",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "10/2024/TT-BTNMT",
+  "ten": "Hồ sơ địa chính, Giấy chứng nhận quyền sử dụng đất",
+  "ban": "31/07/2024",
+  "hl": "01/08/2024",
+  "tt": "Còn hiệu lực (sửa đổi bởi TT 23/2025/TT-BNNMT)",
+  "pdf": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/8/32-vbhn-bnnmt.pdf",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=10/2024/TT-BTNMT",
+  "gc": "Bản PDF là Văn bản hợp nhất 32/VBHN-BNNMT"
+ },
+ {
+  "cap": "Trung ương",
+  "so": "11/2024/TT-BTNMT",
+  "ten": "Kỹ thuật điều tra, đánh giá đất đai; bảo vệ, cải tạo, phục hồi đất",
+  "ban": "31/07/2024",
+  "hl": "",
+  "tt": "Còn hiệu lực (cần kiểm tra)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=11/2024/TT-BTNMT",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "29/2024/TT-BTNMT",
+  "ten": "Kỹ thuật lập, điều chỉnh quy hoạch, kế hoạch sử dụng đất",
+  "ban": "12/12/2024",
+  "hl": "",
+  "tt": "Còn hiệu lực (sửa đổi bởi TT 23/2025/TT-BNNMT)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=29/2024/TT-BTNMT",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "48/2024/TT-BTNMT",
+  "ten": "Định mức KT-KT thống kê, kiểm kê đất đai, bản đồ hiện trạng, CSDL quốc gia",
+  "ban": "31/12/2024",
+  "hl": "15/02/2025",
+  "tt": "Còn hiệu lực",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=48/2024/TT-BTNMT",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "23/2025/TT-BNNMT",
+  "ten": "Phân cấp, phân định thẩm quyền quản lý nhà nước trong lĩnh vực đất đai",
+  "ban": "20/06/2025",
+  "hl": "01/07/2025",
+  "tt": "Còn hiệu lực",
+  "pdf": "https://mae.gov.vn/Pages/chitietvanban.aspx?ItemID=590",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=23/2025/TT-BNNMT",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "19/2026/TT-BNNMT",
+  "ten": "Kỹ thuật lồng ghép đo đạc địa chính, đăng ký đất đai, hồ sơ địa chính, CSDL đất đai",
+  "ban": "",
+  "hl": "",
+  "tt": "Còn hiệu lực (cần kiểm tra ngày)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=19/2026/TT-BNNMT",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "2304/QĐ-BNNMT",
+  "ten": "Công bố thủ tục hành chính lĩnh vực đất đai (theo NĐ 151/2025)",
+  "ban": "23/06/2025",
+  "hl": "01/07/2025",
+  "tt": "Cần kiểm tra: có thể đã được thay bằng danh mục TTHC năm 2026",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=2304/Q%C4%90-BNNMT",
+  "gc": ""
+ },
+ {
+  "cap": "Trung ương",
+  "so": "441/QĐ-BNNMT",
+  "ten": "Công bố hướng dẫn khai thác dữ liệu Giấy chứng nhận trong CSDL quốc gia",
+  "ban": "",
+  "hl": "2026",
+  "tt": "Còn hiệu lực",
+  "pdf": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2026/01/441-bnnmt.pdf",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=441/Q%C4%90-BNNMT",
+  "gc": ""
+ },
+ {
+  "cap": "Phú Thọ (mới)",
+  "so": "85/2025/NQ-HĐND",
+  "ten": "Bảng giá đất lần đầu áp dụng từ 01/01/2026 (toàn tỉnh Phú Thọ sau sáp nhập)",
+  "ban": "30/12/2025",
+  "hl": "01/01/2026",
+  "tt": "Còn hiệu lực",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=85/2025/NQ-H%C4%90ND",
+  "gc": ""
+ },
+ {
+  "cap": "Phú Thọ (mới)",
+  "so": "116/2025/QĐ-UBND",
+  "ten": "Quy định cụ thể một số điều Luật Đất đai và nghị định (hạn mức, tách thửa, hợp thửa...)",
+  "ban": "",
+  "hl": "15/12/2025",
+  "tt": "Còn hiệu lực (cần đối chiếu sửa đổi sau đó)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=116/2025/Q%C4%90-UBND",
+  "gc": ""
+ },
+ {
+  "cap": "Phú Thọ (mới)",
+  "so": "84/2025/QĐ-UBND",
+  "ten": "Bồi thường, hỗ trợ, tái định cư khi Nhà nước thu hồi đất",
+  "ban": "03/11/2025",
+  "hl": "15/11/2025",
+  "tt": "Còn hiệu lực; thay QĐ 15/2024 Phú Thọ và QĐ 10/2025 Vĩnh Phúc",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=84/2025/Q%C4%90-UBND",
+  "gc": ""
+ },
+ {
+  "cap": "Phú Thọ (mới)",
+  "so": "14/2026/QĐ-UBND",
+  "ten": "Phân cấp một số nhiệm vụ, quyền hạn của UBND tỉnh trong lĩnh vực đất đai",
+  "ban": "04/05/2026",
+  "hl": "",
+  "tt": "Còn hiệu lực (cần kiểm tra ngày hiệu lực)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=14/2026/Q%C4%90-UBND",
+  "gc": ""
+ },
+ {
+  "cap": "Phú Thọ (mới)",
+  "so": "33/2026/QĐ-UBND",
+  "ten": "Trình tự, thủ tục hành chính về đất đai trên địa bàn tỉnh",
+  "ban": "29/06/2026",
+  "hl": "",
+  "tt": "Còn hiệu lực (cần kiểm tra ngày hiệu lực)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=33/2026/Q%C4%90-UBND",
+  "gc": ""
+ },
+ {
+  "cap": "Phú Thọ (mới)",
+  "so": "36/2026/QĐ-UBND",
+  "ten": "Hệ số điều chỉnh giá đất năm 2026",
+  "ban": "30/06/2026",
+  "hl": "",
+  "tt": "Còn hiệu lực",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=36/2026/Q%C4%90-UBND",
+  "gc": ""
+ },
+ {
+  "cap": "Phú Thọ (mới)",
+  "so": "135/2025/QĐ-UBND",
+  "ten": "Một số nội dung hoạt động đo đạc và bản đồ; thay QĐ 07/2024 Vĩnh Phúc",
+  "ban": "22/12/2025",
+  "hl": "01/01/2026",
+  "tt": "Còn hiệu lực (số QĐ cần đối chiếu bản chính)",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=135/2025/Q%C4%90-UBND",
+  "gc": ""
+ },
+ {
+  "cap": "Phú Thọ (mới)",
+  "so": "06/2025/QĐ-UBND",
+  "ten": "Định mức KT-KT thống kê, kiểm kê đất đai, bản đồ hiện trạng",
+  "ban": "05/03/2025",
+  "hl": "05/03/2025",
+  "tt": "Cần kiểm tra còn hiệu lực sau sáp nhập",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=06/2025/Q%C4%90-UBND",
+  "gc": ""
+ },
+ {
+  "cap": "Vĩnh Phúc (cũ)",
+  "so": "10/2025/QĐ-UBND (Vĩnh Phúc)",
+  "ten": "Bồi thường, hỗ trợ, tái định cư khi thu hồi đất",
+  "ban": "14/04/2025",
+  "hl": "",
+  "tt": "Hết hiệu lực, thay bởi QĐ 84/2025/QĐ-UBND Phú Thọ",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=10/2025/Q%C4%90-UBND%20%28V%C4%A9nh%20Ph%C3%BAc%29",
+  "gc": ""
+ },
+ {
+  "cap": "Vĩnh Phúc (cũ)",
+  "so": "07/2024/QĐ-UBND (Vĩnh Phúc)",
+  "ten": "Quản lý hoạt động đo đạc và bản đồ chuyên ngành",
+  "ban": "16/02/2024",
+  "hl": "",
+  "tt": "Hết hiệu lực từ 01/01/2026",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=07/2024/Q%C4%90-UBND%20%28V%C4%A9nh%20Ph%C3%BAc%29",
+  "gc": ""
+ },
+ {
+  "cap": "Vĩnh Phúc (cũ)",
+  "so": "11/2025/QĐ-UBND (Vĩnh Phúc)",
+  "ten": "Trung tâm Phát triển quỹ đất tỉnh Vĩnh Phúc",
+  "ban": "14/04/2025",
+  "hl": "",
+  "tt": "Cần kiểm tra: tổ chức bộ máy sau sáp nhập",
+  "pdf": "",
+  "tra": "https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword=11/2025/Q%C4%90-UBND%20%28V%C4%A9nh%20Ph%C3%BAc%29",
+  "gc": ""
+ }
+];
+let DATA=BASE.slice(),dbRef=null,sample=null,downloads=null;
+let cap="Tất cả",sel=0,q="",view="doc",advice=null,uploads=[];
+const caps=["Tất cả","Trung ương","Phú Thọ (mới)","Vĩnh Phúc (cũ)"];
+const $=id=>document.getElementById(id);
+const norm=s=>(s||"").toLowerCase();
+const tra=so=>"https://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword="+encodeURIComponent(so||"");
+const stClass=t=>{t=norm(t);return t.startsWith("hết")?"st-bad":(t.includes("kiểm tra")?"st-warn":"st-ok")};
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+function visible(){return DATA.map((d,i)=>[d,i]).filter(([d])=>(cap==="Tất cả"||d.cap===cap)&&(!q||norm(d.so+" "+d.ten+" "+d.tt).includes(q)))}
+function renderChips(){const c=$("chips");c.textContent="";caps.forEach(k=>{const b=el("button","chip",k);b.type="button";b.setAttribute("aria-pressed",k===cap);b.onclick=()=>{cap=k;renderChips();renderList()};c.appendChild(b)})}
+function renderList(){const l=$("list");l.textContent="";const v=visible();if(!v.length){l.appendChild(el("p","note","Không có văn bản khớp. Thử từ khóa khác.")).style.padding="12px";return}
+v.forEach(([d,i])=>{const b=el("button","row");b.type="button";b.setAttribute("role","listitem");if(i===sel&&view==="doc")b.setAttribute("aria-current","true");
+b.append(el("span","so",d.so),el("span","ten",d.ten),el("span","tag",d.cap+(d.mine?" · BỔ SUNG":"")));
+b.onclick=()=>{sel=i;view="doc";render()};l.appendChild(b)})}
+function docView(b){const d=DATA[sel];if(!d)return;
+b.appendChild(el("h2",null,d.so+" · "+d.ten));
+const dl=el("dl");[["Cấp",d.cap],["Ngày ban hành",d.ban||"Chưa đối chiếu"],["Hiệu lực từ",d.hl||"Chưa đối chiếu"],["Tình trạng",d.tt]].forEach(([k,v],n)=>{const dd=el("dd",n===3?stClass(v):"",v);dl.append(el("dt",null,k),dd)});b.appendChild(dl);
+if(d.gc)b.appendChild(el("p","note",d.gc));
+if(d.nd)b.appendChild(el("div","nd",d.nd));
+const bt=el("div","btns");
+if(d.pdf){const a=el("a","btn","Mở bản PDF");a.href=d.pdf;a.target="_blank";a.rel="noopener";bt.appendChild(a)}
+const s=el("a","btn"+(d.pdf?" alt":""),"Tra toàn văn trên Thư viện Pháp luật");s.href=d.tra||tra(d.so);s.target="_blank";s.rel="noopener";bt.appendChild(s);b.appendChild(bt);
+if(d.mine&&dbRef){const x=el("button","chip","Xóa văn bản bổ sung này");x.type="button";x.onclick=()=>{if(x.dataset.ok){dbRef.collection("added_docs").doc(d.id).delete()}else{x.dataset.ok=1;x.textContent="Bấm lần nữa để xác nhận xóa"}};b.appendChild(x)}
+b.appendChild(el("p","note",d.pdf?"Trang này không nhúng được PDF của website khác, nên bản PDF mở ở tab mới.":"Chưa có đường dẫn PDF chính thống đã kiểm tra cho văn bản này, nên dùng liên kết tra cứu."))}
+function advView(b){
+if(advice==="loading"){b.appendChild(el("p","note","Đang phân tích tình huống…"));return}
+if(!advice){b.appendChild(el("p","note","Chưa có kết quả. Nhập câu hỏi ở trên cùng, tải tài liệu nếu có, rồi bấm Tư vấn."));return}
+if(advice.error){b.appendChild(el("p","st-bad",advice.error));return}
+b.appendChild(el("h2",null,"Kết quả tư vấn"));
+if(advice.cau_hoi)b.appendChild(el("p","note","Câu hỏi: "+advice.cau_hoi));
+if(advice.tom_tat)b.appendChild(el("p",null,advice.tom_tat));
+if(advice.huong_xu_ly){b.appendChild(el("h3",null,"Phương hướng xử lý"));b.appendChild(el("p",null,advice.huong_xu_ly))}
+if((advice.buoc||[]).length){b.appendChild(el("h3",null,"Trình tự thực hiện"));advice.buoc.forEach((s,i)=>{const c=el("div","step");c.appendChild(el("b",null,"Bước "+(i+1)+". "+(s.viec||"")));[["Căn cứ",s.can_cu],["Hồ sơ",s.ho_so],["Thời hạn",s.thoi_han],["Cơ quan",s.co_quan]].forEach(([k,v])=>{if(v)c.appendChild(el("span","k",k+": "+v))});b.appendChild(c)})}
+if((advice.can_cu||[]).length){b.appendChild(el("h3",null,"Văn bản căn cứ"));advice.can_cu.forEach(x=>{b.appendChild(el("p","note",(x.so||"")+(x.dieu?" · "+x.dieu:"")+(x.noi_dung?" · "+x.noi_dung:"")))})}
+if(advice.luu_y){b.appendChild(el("h3",null,"Lưu ý"));b.appendChild(el("p","note",advice.luu_y))}
+b.appendChild(el("p","note","Kết quả này là bản nháp tham khảo từ danh mục trong trang và tài liệu bạn tải lên. Cần đối chiếu toàn văn trước khi áp dụng."))}
+function render(){renderList();$("tabdoc").setAttribute("aria-pressed",view==="doc");$("tabadv").setAttribute("aria-pressed",view==="adv");
+const b=$("body");b.textContent="";(view==="doc"?docView:advView)(b);
+const ok=!!(advice&&advice!=="loading"&&!advice.error)&&view==="adv";$("xw").disabled=!ok;$("xx").disabled=!ok}
+$("tabdoc").onclick=()=>{view="doc";render()};$("tabadv").onclick=()=>{view="adv";render()};
+$("q").oninput=e=>{q=norm(e.target.value.trim());renderList()};
+
+/* tải tài liệu */
+const MAXC=60000;
+function fileText(f){return new Promise((res,rej)=>{const n=norm(f.name);
+if(n.endsWith(".docx")){const r=new FileReader();r.onload=async()=>{try{const o=await mammoth.extractRawText({arrayBuffer:r.result});res(o.value)}catch(e){rej(e)}};r.onerror=rej;r.readAsArrayBuffer(f)}
+else if(/\.(txt|md|csv|json|html?|xml)$/.test(n)){const r=new FileReader();r.onload=()=>res(String(r.result));r.onerror=rej;r.readAsText(f)}
+else rej(new Error("type"))})}
+function renderFiles(){const w=$("files");w.textContent="";uploads.forEach((u,i)=>{const c=el("button","chip",u.name+" ✕");c.type="button";c.title="Bỏ tài liệu này";c.onclick=()=>{uploads.splice(i,1);renderFiles()};w.appendChild(c)})}
+$("upbtn").onclick=()=>$("up").click();
+$("up").onchange=async e=>{const note=$("upnote");note.textContent="";const lim=sample?await sample.limits().catch(()=>null):null;
+for(const f of e.target.files){
+if(f.type.startsWith("image/")){if(lim&&lim.images){uploads.push({name:f.name,img:f})}else note.textContent="Chưa gửi được ảnh: "+f.name;continue}
+try{const t=await fileText(f);uploads.push({name:f.name,text:t.slice(0,MAXC)});if(t.length>MAXC)note.textContent="Một số tài liệu dài, chỉ dùng "+MAXC.toLocaleString("vi-VN")+" ký tự đầu."}
+catch(x){note.textContent="Chưa đọc được "+f.name+". Dùng .docx, .txt, .md, .csv hoặc ảnh. Với PDF, gửi vào khung chat."}}
+e.target.value="";renderFiles()};
+
+/* tư vấn */
+$("go").onclick=async()=>{const t=$("sit").value.trim();if(!t||!sample)return;
+view="adv";advice="loading";render();$("go").disabled=true;
+try{const cat=DATA.map(d=>d.cap+" | "+d.so+" | "+d.ten+" | "+d.tt+(d.nd?"\nTOÀN VĂN/TRÍCH: "+d.nd.slice(0,6000):"")).join("\n");
+const docs=uploads.filter(u=>u.text).map(u=>"[Tài liệu: "+u.name+"]\n"+u.text).join("\n\n");
+const imgs=uploads.filter(u=>u.img).map(u=>u.img);
+const prompt="Bạn hỗ trợ cán bộ văn phòng đăng ký đất đai tại tỉnh Phú Thọ. Dựa CHỈ vào danh mục văn bản, phần toàn văn bổ sung và tài liệu người dùng cung cấp bên dưới. Chỉ ghi số điều, khoản khi chúng xuất hiện trong phần toàn văn được cung cấp; nếu không có thì ghi 'cần tra toàn văn' ở trường dieu. Không bịa. Trả về DUY NHẤT một JSON hợp lệ dạng {\"tom_tat\":string,\"huong_xu_ly\":string,\"buoc\":[{\"viec\":string,\"can_cu\":string,\"ho_so\":string,\"thoi_han\":string,\"co_quan\":string}],\"can_cu\":[{\"so\":string,\"dieu\":string,\"noi_dung\":string}],\"luu_y\":string}. Tiếng Việt, ngắn gọn.\n\nDANH MỤC:\n"+cat+"\n\nTÀI LIỆU NGƯỜI DÙNG:\n"+(docs||"(không có)")+"\n\nCÂU HỎI:\n"+t;
+const r=await sample.json(prompt,{cache:false,images:imgs.length?imgs:undefined});
+r.cau_hoi=t;advice=r}
+catch(e){advice={error:e&&e.code==="not_granted"?"Bạn chưa cấp quyền cho trang hỏi Claude.":"Chưa nhận được kết quả. Thử lại sau."}}
+$("go").disabled=false;render()};
+
+/* xuất file */
+const esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+function para(t,o){o=o||{};return '<w:p><w:pPr>'+(o.h?'<w:spacing w:before="200" w:after="80"/>':'<w:spacing w:after="80"/>')+'</w:pPr><w:r><w:rPr>'+(o.b||o.h?'<w:b/>':'')+(o.h?'<w:sz w:val="26"/>':'<w:sz w:val="22"/>')+'</w:rPr><w:t xml:space="preserve">'+esc(t)+'</w:t></w:r></w:p>'}
+function cell(t,w,b){return '<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/></w:tcPr>'+para(t,{b:b})+'</w:tc>'}
+function table(head,rows,ws){const bd='<w:tblBorders>'+["top","left","bottom","right","insideH","insideV"].map(x=>'<w:'+x+' w:val="single" w:sz="4" w:color="999999"/>').join("")+'</w:tblBorders>';
+return '<w:tbl><w:tblPr><w:tblW w:w="0" w:type="auto"/>'+bd+'</w:tblPr><w:tr>'+head.map((h,i)=>cell(h,ws[i],true)).join("")+'</w:tr>'+rows.map(r=>'<w:tr>'+r.map((c,i)=>cell(c,ws[i])).join("")+'</w:tr>').join("")+'</w:tbl>'}
+async function exportWord(){const a=advice,B=[];
+B.push(para("PHIẾU TƯ VẤN PHÁP LUẬT ĐẤT ĐAI",{h:1}));B.push(para("Ngày lập: "+new Date().toLocaleDateString("vi-VN")));
+B.push(para("Câu hỏi",{h:1}));B.push(para(a.cau_hoi||""));
+if(uploads.length){B.push(para("Tài liệu kèm theo: "+uploads.map(u=>u.name).join(", ")))}
+B.push(para("Tóm tắt",{h:1}));B.push(para(a.tom_tat||""));
+B.push(para("Phương hướng xử lý",{h:1}));B.push(para(a.huong_xu_ly||""));
+B.push(para("Trình tự thực hiện",{h:1}));
+B.push(table(["Bước","Nội dung công việc","Căn cứ","Hồ sơ","Thời hạn","Cơ quan"],(a.buoc||[]).map((s,i)=>[String(i+1),s.viec||"",s.can_cu||"",s.ho_so||"",s.thoi_han||"",s.co_quan||""]),[700,2600,1900,1900,1100,1200]));
+B.push(para("Văn bản căn cứ",{h:1}));
+B.push(table(["Số hiệu","Điều, khoản","Nội dung"],(a.can_cu||[]).map(x=>[x.so||"",x.dieu||"",x.noi_dung||""]),[2200,2200,5000]));
+B.push(para("Lưu ý",{h:1}));B.push(para(a.luu_y||""));
+B.push(para("Bản nháp tham khảo, cần đối chiếu toàn văn trước khi áp dụng."));
+const doc='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'+B.join("")+'<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134"/></w:sectPr></w:body></w:document>';
+const z=new JSZip();
+z.file("[Content_Types].xml",'<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>');
+z.file("_rels/.rels",'<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>');
+z.file("word/document.xml",doc);
+const blob=await z.generateAsync({type:"blob",mimeType:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"});
+await downloads.save({filename:"Tu_van_dat_dai.docx",data:blob})}
+async function exportExcel(){const a=advice,wb=XLSX.utils.book_new();
+const s1=[["Câu hỏi",a.cau_hoi||""],["Tóm tắt",a.tom_tat||""],["Phương hướng xử lý",a.huong_xu_ly||""],["Lưu ý",a.luu_y||""],[],["Bước","Nội dung công việc","Căn cứ","Hồ sơ","Thời hạn","Cơ quan","Đã xong"]].concat((a.buoc||[]).map((s,i)=>[i+1,s.viec||"",s.can_cu||"",s.ho_so||"",s.thoi_han||"",s.co_quan||"",""]));
+const w1=XLSX.utils.aoa_to_sheet(s1);w1["!cols"]=[{wch:20},{wch:50},{wch:30},{wch:30},{wch:14},{wch:22},{wch:10}];XLSX.utils.book_append_sheet(wb,w1,"Các bước");
+const s2=[["Số hiệu","Điều, khoản","Nội dung"]].concat((a.can_cu||[]).map(x=>[x.so||"",x.dieu||"",x.noi_dung||""]));
+const w2=XLSX.utils.aoa_to_sheet(s2);w2["!cols"]=[{wch:26},{wch:26},{wch:70}];XLSX.utils.book_append_sheet(wb,w2,"Căn cứ pháp lý");
+const out=XLSX.write(wb,{bookType:"xlsx",type:"array"});
+await downloads.save({filename:"Tu_van_dat_dai.xlsx",data:new Blob([out],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"})})}
+function guard(fn){return async()=>{if(!downloads)return;try{await fn()}catch(e){if(!(e&&e.code==="declined"))alert_note("Chưa xuất được file. Thử lại.")}}}
+function alert_note(m){const p=el("p","st-bad",m);$("body").appendChild(p)}
+$("xw").onclick=guard(exportWord);$("xx").onclick=guard(exportExcel);
+
+render();renderChips();
+(async()=>{
+try{sample=await claude.use("sample")}catch(e){}
+try{downloads=await claude.use("downloads")}catch(e){}
+if(sample)$("askbox").hidden=false;
+if(!downloads){$("xw").hidden=true;$("xx").hidden=true}
+let db=null;try{db=await claude.use("db")}catch(e){}
+if(db){dbRef=db;$("addbtn").hidden=false;
+$("addbtn").onclick=()=>{$("addp").hidden=!$("addp").hidden};
+$("f_cancel").onclick=()=>{$("addp").hidden=true};
+$("f_save").onclick=async()=>{const so=$("f_so").value.trim(),ten=$("f_ten").value.trim(),m=$("f_msg");
+if(!so||!ten){m.textContent="Nhập số hiệu và trích yếu.";return}
+$("f_save").disabled=true;m.textContent="Đang lưu…";
+try{await db.collection("added_docs").add({cap:$("f_cap").value,so:so,ten:ten,ban:$("f_ban").value.trim(),hl:$("f_hl").value.trim(),tt:$("f_tt").value.trim()||"Chưa xác định",pdf:$("f_pdf").value.trim(),nd:$("f_nd").value.slice(0,200000),added:new Date().toISOString()});
+m.textContent="Đã lưu "+so+". Văn bản đã vào danh mục và dùng khi tư vấn.";["f_so","f_ten","f_ban","f_hl","f_pdf","f_nd"].forEach(k=>$(k).value="")}
+catch(e){m.textContent=e&&e.code==="quota_exceeded"?"Kho dữ liệu đã đầy.":"Chưa lưu được. Bạn cần quyền chỉnh sửa trang này."}
+$("f_save").disabled=false};
+db.collection("added_docs").orderBy("added","desc").onSnapshot(s=>{
+const add=s.docs.map(x=>{const v=x.data();return Object.assign({},v,{id:x.id,mine:true,gc:v.gc||"Văn bản do bạn bổ sung",tra:tra(v.so)})});
+const cur=DATA[sel];DATA=BASE.concat(add);
+const k=cur?DATA.findIndex(d=>d.so===cur.so):-1;sel=k>=0?k:0;render()},e=>{})}
+})();
+</script>
